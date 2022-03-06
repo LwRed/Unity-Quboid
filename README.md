@@ -1,5 +1,5 @@
 # Quboid
- Cuboid Game clone made with Unity
+ Cuboid Game clone made with Unity - Version 0.24
 
 Fonctionnalites / Fonctionalities :
 - 12 niveaux // 12 levels
@@ -10,3 +10,9 @@ Fonctionnalites / Fonctionalities :
 - MacOs et Windows Builds Ok
 
 <img src="Capture.png" width="640">
+
+To Do Help :
+- French / English / Spanish Interface
+- Menu
+- End / Restart
+- Level Generator
