@@ -1,0 +1,3 @@
+t t t 0 w w 0 t t t
+t s t w w t t t g t
+t t t w w 0 0 t t t

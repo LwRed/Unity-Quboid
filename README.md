@@ -1,2 +1,2 @@
 # Quboid
-Cuboid game clone made with Unity
+ Cuboid Game clone made with Unity

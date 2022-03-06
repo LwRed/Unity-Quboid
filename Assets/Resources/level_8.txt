@@ -1,0 +1,7 @@
+t t t t 0 0 0 0 0 0 0
+t s t t t w t w t t 0
+t t t t 0 0 0 0 0 t 0
+0 0 0 0 0 0 0 0 t t t
+0 0 0 0 0 0 0 0 t t t
+0 0 0 0 0 0 0 0 t g t
+0 0 0 0 0 0 0 0 t t t
