@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -62,6 +63,19 @@ public class GameManager : MonoBehaviour
                 //StartCoroutine (CoUpdate());
                //activeKeyboard = true;
             }
+
+        //Quit ou Redemarrage du jeu
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Debug.Log("Nouvelle partie");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        else if (Input.GetKeyDown(KeyCode.Q) || Input.GetKey("escape"))
+        {
+            Debug.Log("Quitte le jeu");
+            Application.Quit();
+        }
+
     }
 
     public void ResetLevel()

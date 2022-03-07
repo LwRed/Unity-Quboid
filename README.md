@@ -14,5 +14,5 @@ Fonctionnalites / Fonctionalities :
 To Do Help :
 - French / English / Spanish Interface
 - Menu
-- End / Restart
+- End / Restart (ok v25)
 - Level Generator
