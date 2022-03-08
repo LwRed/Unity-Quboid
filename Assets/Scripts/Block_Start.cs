@@ -22,6 +22,8 @@ public class Block_Start : MonoBehaviour
         StartMove();
     }
 
+//DEBUT ITWEEN
+
     int RandomMark()
     {
         int mark = Random.Range(0, 2);
@@ -59,6 +61,9 @@ public class Block_Start : MonoBehaviour
         //Debug.Log("iTween Complete");
         _collider.isTrigger = false;
     }
+
+//FIN ITWEEN
+
     void OnCollisionEnter (Collision col)
     {
         if (col.gameObject.tag == "Player")
@@ -93,8 +98,8 @@ public class Block_Start : MonoBehaviour
     }
     IEnumerator CoUpdate2()
     {
-        //Tells Unity to wait 1 second
-        yield return new WaitForSeconds(0.25f); //0.15f
+        //Tells Unity to wait
+        yield return new WaitForSeconds(0.10f); //0.25f sur PC lent, 0.10f sur PC rapide
         //Cuboid en appui sur une seule Tile
         if (GameObject.Find("GameManager").GetComponent<GameManager>().tileContact == 1 && GameObject.FindWithTag("Player").GetComponent<Quboid>()._state != CUBESATE.VERTICAL)
             {

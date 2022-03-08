@@ -7,7 +7,7 @@ public class FollowCamera : MonoBehaviour
      public Transform target;
 
      public Vector3 target_Offset;
-     public float smoothTime = 0.3F;
+     public float smoothTime = 0.3f;
      private Vector3 velocity = Vector3.zero;
  private void Start()
  {

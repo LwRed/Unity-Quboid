@@ -129,8 +129,8 @@ public class Block_WeakTile : MonoBehaviour
 
     IEnumerator CoUpdate()
     {
-        //Tells Unity to wait 1 second
-        yield return new WaitForSeconds(0.15f); //0.25f
+        //Tells Unity to wait
+        yield return new WaitForSeconds(0.10f); //0.25f sur PC lent, 0.10f sur PC rapide
         //_particleEffect.SetActive(false);
         if (GameObject.Find("GameManager").GetComponent<GameManager>().weakContact == 1 && GameObject.Find("GameManager").GetComponent<GameManager>().tileContact == 0)
             {       

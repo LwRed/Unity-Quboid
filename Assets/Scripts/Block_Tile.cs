@@ -126,8 +126,8 @@ public class Block_Tile : MonoBehaviour
     }
     IEnumerator CoUpdate2()
     {
-        //Tells Unity to wait 1 second
-        yield return new WaitForSeconds(0.10f); //0.15f
+        //Tells Unity to wait
+        yield return new WaitForSeconds(0.10f); //0.25f sur PC lent, 0.10f sur PC rapide
         //Cuboid en appui sur une seule Tile
         if (GameObject.Find("GameManager").GetComponent<GameManager>().tileContact == 1 && GameObject.Find("GameManager").GetComponent<GameManager>().weakContact == 0 && GameObject.FindWithTag("Player").GetComponent<Quboid>()._state != CUBESATE.VERTICAL)
             {

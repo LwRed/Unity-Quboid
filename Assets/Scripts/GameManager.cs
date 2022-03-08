@@ -51,6 +51,8 @@ public class GameManager : MonoBehaviour
         //Update Canvas Texts
         MoveText.text = "Mouvements : " + moves;
         LevelText.text = "Niveau : " + levelNumber;
+        LivesText.text = "Vies : " + lives;
+        
 
         if (GameObject.FindWithTag("Player") != null && scriptCamera.target == null)
         {
@@ -169,7 +171,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Partie terminée");
+            Debug.Log("Partie terminée ! Bravo");
             levelNumber = 0;
             scriptLevel.mapText = Resources.Load("level_" + levelNumber) as TextAsset;
             this.GetComponent<ReadLevel>().GenerateLevel();
