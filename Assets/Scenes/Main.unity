@@ -282,7 +282,7 @@ LightingSettings:
   m_PrefabAsset: {fileID: 0}
   m_Name: Settings.lighting
   serializedVersion: 3
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_EnableBakedLightmaps: 1
   m_EnableRealtimeLightmaps: 0
   m_RealtimeEnvironmentLighting: 1
@@ -290,7 +290,7 @@ LightingSettings:
   m_AlbedoBoost: 1
   m_IndirectOutputScale: 1
   m_UsingShadowmask: 0
-  m_BakeBackend: 2
+  m_BakeBackend: 1
   m_LightmapMaxSize: 512
   m_BakeResolution: 20
   m_Padding: 2
@@ -641,7 +641,7 @@ MonoBehaviour:
   LevelText: {fileID: 142577726}
   LivesText: {fileID: 1796442210}
   AskedFrameRate: 60
-  levelNumber: 12
+  levelNumber: 0
   moves: 0
   lives: 3
   weakContact: 0
