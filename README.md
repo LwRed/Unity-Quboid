@@ -20,3 +20,4 @@ To Do Help :
 - French / English / Spanish Interface
 - Menu
 - Level Generator
+- Zoom In / Out Cam
