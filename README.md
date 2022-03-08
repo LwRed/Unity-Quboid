@@ -7,6 +7,9 @@ Fonctionnalites / Fonctionalities :
 - Moteur de jeu entre collision et gravite / Trigger & Gravity mix in Engine game
 - 2 Musiques / 2 Background Musics, swith with "M" key
 - Bruitages / Sounds
+- Animations des Prefabs avec iTween / iTween Prefabs Animations
+- Soft Particules
+- Post Processing
 - MacOs et Windows Builds Ok
 
 <img src="Capture.png" width="640">
