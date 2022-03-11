@@ -86,10 +86,10 @@ public class Block_Tile : MonoBehaviour
             if (col.gameObject.tag == "Player")
             {
                 _particleEffect.SetActive(true);
-                Debug.Log("Tile Contact On");
+                Debug.Log("Block_Tile.cs - OnCollisionEnter");
                 GameObject.Find("GameManager").GetComponent<GameManager>().tileContact++;
                 _protected = false;
-                //GameObject.Find("GameManager").GetComponent<GameManager>().activeKeyboard = true;
+                GameObject.Find("GameManager").GetComponent<GameManager>().activeKeyboard = true;
                 StartCoroutine (CoUpdate2());
                 StartCoroutine (CoUpdate());
             }
@@ -99,8 +99,9 @@ public class Block_Tile : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-            Debug.Log("Tile Contact Off");
+            Debug.Log("Block_Tile.cs - OnCollisionExit");
             GameObject.Find("GameManager").GetComponent<GameManager>().tileContact--;
+            GameObject.Find("GameManager").GetComponent<GameManager>().activeKeyboard = false;
             _protected = true;
             //StartCoroutine (CoUpdate2());
             StartCoroutine (CoUpdate());
@@ -127,31 +128,28 @@ public class Block_Tile : MonoBehaviour
     IEnumerator CoUpdate2()
     {
         //Tells Unity to wait
-        yield return new WaitForSeconds(0.10f); //0.25f sur PC lent, 0.10f sur PC rapide
+        yield return new WaitForSeconds(0.15f); //0.25f sur PC lent, 0.10f sur PC rapide
+
         //Cuboid en appui sur une seule Tile
-        if (GameObject.Find("GameManager").GetComponent<GameManager>().tileContact == 1 && GameObject.Find("GameManager").GetComponent<GameManager>().weakContact == 0 && GameObject.FindWithTag("Player").GetComponent<Quboid>()._state != CUBESATE.VERTICAL)
+        if (GameObject.Find("GameManager").GetComponent<GameManager>().tileContact == 1 && GameObject.Find("GameManager").GetComponent<GameManager>().weakContact == 0 && GameObject.FindWithTag("Player").GetComponent<Quboid>()._state != CUBESATE.VERTICAL && GameObject.FindWithTag("Player").GetComponent<Quboid>()._isTurning == false)
             {
                 if(_protected == false)
                 {
-                    Debug.Log("Tile #1");
+                    Debug.Log("Block_Tile.cs - #1 contact only - Loose");
                     GameObject.Find("GameManager").GetComponent<GameManager>()._gameOver = true;
                     GameObject.Find("GameManager").GetComponent<GameManager>().activeKeyboard = false;
-                    iTween.ScaleTo(this.gameObject, iTween.Hash("x", 0, "y", 0, "z", 0, "easeType", iTween.EaseType.easeInBack, "delay", 0.0f, "time", 0.25f, "onComplete", "nothing"));
-                    Destroy(this.gameObject);
+                    //iTween.ScaleTo(this.gameObject, iTween.Hash("x", 0, "y", 0, "z", 0, "easeType", iTween.EaseType.easeInBack, "delay", 0.0f, "time", 0.25f, "onComplete", "nothing"));
+                    //Destroy(this.gameObject);
                 }
             }
         //Cuboid sans appui
         else if(GameObject.Find("GameManager").GetComponent<GameManager>().tileContact == 0)
             {
-                Debug.Log("Tile #0");
+                Debug.Log("Block_Tile.cs - #0 contact - Loose");
                 GameObject.Find("GameManager").GetComponent<GameManager>()._gameOver = true;
                 GameObject.Find("GameManager").GetComponent<GameManager>().activeKeyboard = false;
             }
-        else
-        {
-            Debug.Log("Tile #Other");
-            GameObject.Find("GameManager").GetComponent<GameManager>()._gameOver = false;
-            GameObject.Find("GameManager").GetComponent<GameManager>().activeKeyboard = true;
-        }
+
+      
     }
 }

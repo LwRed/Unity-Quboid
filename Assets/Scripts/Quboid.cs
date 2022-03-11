@@ -27,7 +27,7 @@ public class Quboid : MonoBehaviour
     private int _moveCount;
     private Vector3 _pivot;
     private Vector3 _axis;
-    private bool _isTurning;
+    public bool _isTurning;
     private Vector3 _firstPos;
     private Quaternion _currentRot = Quaternion.identity;
     private BoxCollider _boxColl;
@@ -59,11 +59,11 @@ public class Quboid : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-
-        if (_isTurning == false && GameObject.Find("GameManager").GetComponent<GameManager>().activeKeyboard == true)
+        //Clavier a bloquer si Keyboard Off ou GameOver ou Cube qui tourne
+        if (_isTurning == false && GameObject.Find("GameManager").GetComponent<GameManager>().activeKeyboard == true && GameObject.Find("GameManager").GetComponent<GameManager>()._gameOver == false)
         {
 
-            //Clavier a bloquer
+            
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 StartCoroutine("TurningCube", DIRECTION.UP);
@@ -243,11 +243,15 @@ public class Quboid : MonoBehaviour
         }
 
         SetState(dir);
-        _isTurning = false;
         SetGravity(true);
 
         //Play Audio
         audioSource.Play();
+        //Unity Wait for Turning Cube
+        yield return new WaitForSeconds(0.10f);
+        _isTurning = false;
+        
+
     }
 
         void SetGravity(bool isGravity)
@@ -264,7 +268,7 @@ public class Quboid : MonoBehaviour
         {
             if (winBool == false)
             {
-            Debug.Log("GoalTile #Check");
+            Debug.Log("Quboid.cs - #Goal Check - Gagne");
             GameObject.Find("GameManager").GetComponent<GameManager>().activeKeyboard = false;
             GameObject.Find("GameManager").GetComponent<GameManager>().NextLevel();
             winBool = true;
@@ -275,7 +279,7 @@ public class Quboid : MonoBehaviour
         {
             if (looseBool == false)
             {
-            Debug.Log("Ground #Check");
+            Debug.Log("Quboid.cs - #Ground Check - Perdu");
             GameObject.Find("GameManager").GetComponent<GameManager>().activeKeyboard = false;
             GameObject.Find("GameManager").GetComponent<GameManager>().ResetLevel();
             looseBool = true;
