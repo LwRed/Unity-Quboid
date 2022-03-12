@@ -1,5 +1,5 @@
 # Quboid
- Cuboid Game clone made with Unity - Version 0.26
+ Cuboid Game clone made with Unity - Version 0.27
 
 Fonctionnalites / Fonctionalities :
 - 13 niveaux // 13 levels
