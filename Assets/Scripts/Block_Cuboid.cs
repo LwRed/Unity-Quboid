@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//Classe permettant de positionner le Quboid sur la Grille avec iTween
 public class Block_Cuboid : MonoBehaviour
 {
     private Vector3 _firstPos;
@@ -43,14 +45,12 @@ public class Block_Cuboid : MonoBehaviour
 
         this.transform.position = _tempPos = new Vector3(Random.Range(0, 30) * RandomMark(), _firstPos.y + Random.Range(0, 10) * RandomMark(), Random.Range(0, 30) * RandomMark());
 
-        //iTween.MoveTo(this.gameObject, _firstPos, moveTime);
         iTween.MoveTo(this.gameObject, iTween.Hash("position", _firstPos, "time", moveTime, "oncomplete", "MoveComplete"));
-        //iTween.MoveTo()
+
     }
 
     void MoveComplete()
     {
-        //Debug.Log("iTween Complete");
         _collider.isTrigger = false;
     }
 }

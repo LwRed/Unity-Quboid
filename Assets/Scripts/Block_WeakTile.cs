@@ -82,10 +82,6 @@ public class Block_WeakTile : MonoBehaviour
             {
                 decalage = 0;
             }
-            else
-            {
-                decalage = _firstdecalage;
-            }
 
     }
     void OnCollisionEnter (Collision col)
@@ -93,23 +89,26 @@ public class Block_WeakTile : MonoBehaviour
 
             if (col.gameObject.tag == "Player")
             {
-                
+                decalage = 0;
                 //_particleEffect.SetActive(true);
                 Debug.Log("Weak Contact On");
                 GameObject.Find("GameManager").GetComponent<GameManager>().weakContact++;
                 //Game Engine for Weak Test
                 _protected = false;
-                //GameObject.Find("GameManager").GetComponent<GameManager>().activeKeyboard = false;
-                StartCoroutine (CoUpdate());
+                GameObject.Find("GameManager").GetComponent<GameManager>().activeKeyboard = true;
+                StartCoroutine(CoUpdate2());
+                //StartCoroutine(CoUpdate());
             }
 
     }
     void OnCollisionExit (Collision col)
     {
         if (col.gameObject.tag == "Player")
-        {   
+        {
+            decalage = _firstdecalage;
             Debug.Log("Weak Contact Off");
             GameObject.Find("GameManager").GetComponent<GameManager>().weakContact--;
+            GameObject.Find("GameManager").GetComponent<GameManager>().activeKeyboard = false;
             //Protect Previous Tile from destroy
             _protected = true;
             //StartCoroutine (CoUpdate());
@@ -121,54 +120,45 @@ public class Block_WeakTile : MonoBehaviour
     
     //calculate what the new Y position will be
     float newY = Mathf.Sin(Time.time * decalage * speed) * height + _firstPos.y;
-    //Debug.Log(Time.time);
-    //Debug.Log(decalage);
-     //set the object's Y to the new calculated Y
     transform.position = new Vector3(transform.position.x, newY, transform.position.z) ;
     } 
 
-    IEnumerator CoUpdate()
+    IEnumerator CoUpdate2()
     {
         //Tells Unity to wait
         yield return new WaitForSeconds(0.10f); //0.25f sur PC lent, 0.10f sur PC rapide
         //_particleEffect.SetActive(false);
-        if (GameObject.Find("GameManager").GetComponent<GameManager>().weakContact == 1 && GameObject.Find("GameManager").GetComponent<GameManager>().tileContact == 0)
-            {       
-                    //Son
-                    audioWeakCrack.Play();
-                    //Weak Test True => Destroy this Weak Tile
-                    if (_protected == false)
-                    {
-                        GameObject.Find("GameManager").GetComponent<GameManager>()._gameOver = true;
-                        GameObject.Find("GameManager").GetComponent<GameManager>().activeKeyboard = false;
-                        Debug.Log("Weaked!");
-                        iTween.ScaleTo(this.gameObject, iTween.Hash("x", 0, "y", 0, "z", 0, "easeType", iTween.EaseType.easeInBack, "delay", 0.0f, "time", 0.1f, "onComplete", "nothing"));
-                        Destroy(this.gameObject,0.1f);
-                    }       
-            }
-            else if(GameObject.Find("GameManager").GetComponent<GameManager>().weakContact == 1 && GameObject.Find("GameManager").GetComponent<GameManager>().tileContact == 1)
+        if (GameObject.Find("GameManager").GetComponent<GameManager>().weakContact == 1 && GameObject.Find("GameManager").GetComponent<GameManager>().tileContact == 0 && GameObject.FindWithTag("Player").GetComponent<Quboid>()._isTurning == false)
+        {       
+            //Weak Test True => Destroy this Weak Tile
+            if (_protected == false)
             {
+                GameObject.Find("GameManager").GetComponent<GameManager>()._gameOver = true;
+                GameObject.Find("GameManager").GetComponent<GameManager>().activeKeyboard = false;
+                Debug.Log("Weaked!");
                 //Son
-                audioWeakSimple.Play();
-                //Weak Test False => Release Keyboard
-                Debug.Log("WeakTile #1");
-                GameObject.Find("GameManager").GetComponent<GameManager>()._gameOver = false;
-                //GameObject.Find("GameManager").GetComponent<GameManager>().activeKeyboard = true;
-            }
-            else if(GameObject.Find("GameManager").GetComponent<GameManager>().weakContact == 2)
-            {
-                //Son
-                audioWeakDouble.Play();
-                //Weak Test False => Release Keyboard
-                Debug.Log("WeakTile #2");
-                GameObject.Find("GameManager").GetComponent<GameManager>()._gameOver = false;
-                GameObject.Find("GameManager").GetComponent<GameManager>().activeKeyboard = true;
-            }
-            else
-            {
-                Debug.Log("WeakTile #Other");
-                GameObject.Find("GameManager").GetComponent<GameManager>()._gameOver = false;
-                GameObject.Find("GameManager").GetComponent<GameManager>().activeKeyboard = true;
-            }
+                audioWeakCrack.Play();
+                iTween.ScaleTo(this.gameObject, iTween.Hash("x", 0, "y", 0, "z", 0, "easeType", iTween.EaseType.easeInBack, "delay", 0.0f, "time", 0.1f, "onComplete", "nothing"));
+                Destroy(this.gameObject, 0.1f);
+            }     
+        }
+        else if(GameObject.Find("GameManager").GetComponent<GameManager>().weakContact == 1 && GameObject.Find("GameManager").GetComponent<GameManager>().tileContact == 1 && GameObject.FindWithTag("Player").GetComponent<Quboid>()._isTurning == false)
+        {
+            //Weak Test False => Release Keyboard
+            Debug.Log("WeakTile #1");
+            GameObject.Find("GameManager").GetComponent<GameManager>()._gameOver = false;
+            GameObject.Find("GameManager").GetComponent<GameManager>().activeKeyboard = true;
+            //Son
+            audioWeakSimple.Play();
+        }
+        else if(GameObject.Find("GameManager").GetComponent<GameManager>().weakContact == 2 && GameObject.FindWithTag("Player").GetComponent<Quboid>()._isTurning == false)
+        {
+            //Weak Test False => Release Keyboard
+            Debug.Log("WeakTile #2");
+            GameObject.Find("GameManager").GetComponent<GameManager>()._gameOver = false;
+            GameObject.Find("GameManager").GetComponent<GameManager>().activeKeyboard = true;
+            //Son
+            audioWeakDouble.Play();
+        }
     }
 }

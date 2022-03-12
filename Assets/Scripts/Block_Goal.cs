@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Classe permettant de positionner le Block Goal sur la Grille avec iTween
+//Classe permettant de gerer les collisions du Quboid a la Tile Goal
+//Classe permettant le mouvement Haut Bas de la Tile Goal
 public class Block_Goal : MonoBehaviour
 {
     private Vector3 _firstPos;
@@ -14,9 +17,8 @@ public class Block_Goal : MonoBehaviour
     float speed = 1f;
     //adjust this to change how high it goes
     [SerializeField]
-    float height = 0.05f;
+    float height = 0.1f;
     private float decalage = 0.1f;
-    private float _firstdecalage;
 
     void Awake()
     {
@@ -24,7 +26,6 @@ public class Block_Goal : MonoBehaviour
         _collider = GetComponent<BoxCollider>();
         StartMove();
         decalage = Random.Range(0.1f, 0.3f);
-        _firstdecalage = decalage;
     }
 
     int RandomMark()
@@ -54,9 +55,8 @@ public class Block_Goal : MonoBehaviour
 
         this.transform.position = _tempPos = new Vector3(Random.Range(0, 30) * RandomMark(), _firstPos.y + Random.Range(0, 10) * RandomMark(), Random.Range(0, 30) * RandomMark());
 
-        //iTween.MoveTo(this.gameObject, _firstPos, moveTime);
         iTween.MoveTo(this.gameObject, iTween.Hash("position", _firstPos, "time", moveTime, "oncomplete", "MoveComplete"));
-        //iTween.MoveTo()
+
     }
 
     void MoveComplete()
@@ -64,26 +64,13 @@ public class Block_Goal : MonoBehaviour
         //Debug.Log("iTween Complete");
         _collider.isTrigger = false;
     }
-    void OnCollisionStay (Collision col)
-    {
-
-            if (col.gameObject.tag == "Player")
-            {
-                decalage = 0;
-            }
-            else
-            {
-                decalage = _firstdecalage;
-            }
-
-    }
 
     void OnCollisionEnter (Collision col)
     {
 
             if (col.gameObject.tag == "Player")
             {
-                Debug.Log("Tile Contact On");
+                Debug.Log("Block_Goal.cs - Contact");
                 GameObject.Find("GameManager").GetComponent<GameManager>().tileContact++;
                 //GameObject.Find("GameManager").GetComponent<GameManager>().activeKeyboard = true;
             }
@@ -102,10 +89,8 @@ public class Block_Goal : MonoBehaviour
 
     void Update()
     {
-
-    //calculate what the new Y position will be
+    //Animation Haut Bas de la Tile
     float newY = Mathf.Sin(Time.time * decalage * speed) * height + _firstPos.y;
-     //set the object's Y to the new calculated Y
     transform.position = new Vector3(transform.position.x, newY, transform.position.z) ;
     } 
 }
