@@ -132,6 +132,7 @@ MonoBehaviour:
   _state: 0
   smoothness: 10
   audioSource: {fileID: 7329193698208075301}
+  _isTurning: 0
 --- !u!65 &9059002956034175574
 BoxCollider:
   m_ObjectHideFlags: 0
