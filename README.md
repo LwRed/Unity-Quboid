@@ -1,7 +1,10 @@
 # Quboid
- Cuboid Game clone made with Unity - Version 0.27
+ Cuboid Game clone made with Unity - Version 0.28
 
 Fonctionnalites / Fonctionalities :
+- End / Restart Game / Restart Level (v0.28)
+- New Wood Tile (v0.28)
+- Switch Background Music (v0.26 with "M" key)
 - 13 niveaux // 13 levels
 - Canvas avec affichage du nombre de mouvements, du meilleur score, du nombre de vies restantes, du niveau / Levels, Number of mouvements, Level Best Score, Lifes
 - Moteur de jeu entre collision et gravite / Trigger & Gravity mix in Engine game
@@ -15,8 +18,6 @@ Fonctionnalites / Fonctionalities :
 <img src="Capture.png" width="640">
 
 To Do Help :
-- End / Restart (ok v0.25)
-- Switch Background Music (ok v0.26 with "M" key)
 - French / English / Spanish Interface
 - Menu
 - Level Generator
